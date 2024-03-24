@@ -1,32 +1,52 @@
-import React from "react";
-import Icon from "./Icon";
+import React, { useState } from "react";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import Block from "./Block";
 
-export default function Sidebar() {
+export default function Sidebar({ data: initialData }) {
+  const [data, setData] = useState(initialData); // State to hold modified data
+
+  const handleInputChange = (event, id) => {
+    const newData = data.map((item) =>
+      item.id === id ? { ...item, input: event.target.value } : item
+    );
+    setData(newData);
+  };
+
   return (
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
-      <div className="font-bold"> {"Events"} </div>
-      <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"When "}
-        <Icon name="flag" size={15} className="text-green-600 mx-2" />
-        {"clicked"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"When this sprite clicked"}
-      </div>
-      <div className="font-bold"> {"Motion"} </div>
-      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"Move 10 steps"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"Turn "}
-        <Icon name="undo" size={15} className="text-white mx-2" />
-        {"15 degrees"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"Turn "}
-        <Icon name="redo" size={15} className="text-white mx-2" />
-        {"15 degrees"}
-      </div>
+      <Droppable droppableId="side_menu">
+        {(provided) => (
+          <ul
+            className=""
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            
+          >
+            {data.map((item, index) => (
+              <Draggable
+                key={item.id.toString()} 
+                draggableId={item.id.toString()} 
+                index={index}
+              >
+                {(provided) => (
+                  <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <Block
+                      item={item}
+                      index={index}
+                      handleInputChange={handleInputChange}
+                    />
+                  </li>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
     </div>
   );
 }

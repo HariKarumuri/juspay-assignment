@@ -1,0 +1,92 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.draggable {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.droppable {
+  width: 200px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+li:hover {
+  background-color: #ddd;
+}
+
+.sideBaritem-input {
+  width: 50px !important;
+}
+
+.custom-block {
+  position: relative;
+  display: block;
+  width: 200px;
+}
+
+.puzzle-bottom {
+  position: absolute;
+  height: 15px;
+  width: 20px;
+  border-radius: 50%;
+  left: 20%;
+  bottom: -29%;
+  transform: translateX(-50%);
+  border-top-color: transparent;
+  background-color: inherit;
+  z-index: 2;
+}
+
+.puzzle-top {
+  position: absolute;
+  height: 15px;
+  width: 20px;
+  border-radius: 50%;
+  top: -8%;
+  left: 20%;
+  transform: translateX(-50%);
+  border-top-color: transparent;
+  background-color: rgb(211, 211, 211);
+  z-index: 1;
+}
+.cat-body {
+  position: relative;
+  width: 100%;
+}
+.cat-container {
+  position: relative;
+  height: 600px;
+  width: 100%;
+  background: pink;
+}
+.playCat {
+  position: absolute;
+}

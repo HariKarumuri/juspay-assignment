@@ -5,9 +5,4 @@ import "tailwindcss/tailwind.css";
 
 console.log("hi");
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));

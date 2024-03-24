@@ -1,0 +1,40 @@
+import React, { useState } from "react";
+import Sidebar from "./components/Sidebar";
+import MidArea from "./components/MidArea";
+import PreviewArea from "./components/PreviewArea";
+import FunctionListData from "./components/FunctionList";
+import { DragDropContext } from "react-beautiful-dnd";
+import uuid from "uuid/v4";
+import "./App.css";
+
+export default function App() {
+  const [data, setData] = useState(FunctionListData);
+  const [selectedFunc, setSelectedFunc] = useState([]);
+  const colums = [{ [uuid()]: { name: "sidebar", items: [FunctionListData] } }];
+  const handleDragEnd = (result) => {
+    const { destination, source } = result;
+    console.log(result);
+    if (!destination) return; // dropped outside the list
+
+    const reorderedData = Array.from(data);
+    const [selectedItem] = reorderedData.splice(source.index, 1);
+    reorderedData.splice(destination.index, 0, selectedItem);
+    setSelectedFunc(reorderedData);
+  };
+
+  return (
+    <div className="bg-blue-100 pt-6 font-sans">
+      <div className="h-screen overflow-hidden flex flex-row">
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <div className="flex-1 h-screen overflow-hidden flex flex-row bg-white border-t border-r border-gray-200 rounded-tr-xl mr-2">
+            <Sidebar data={data} />
+            <MidArea data={selectedFunc} />
+          </div>
+          <div className="w-1/3 relative h-screen overflow-scroll flex flex-row bg-white border-t border-l border-gray-200 rounded-tl-xl ml-2">
+            <PreviewArea selectedFunc={selectedFunc} />
+          </div>
+        </DragDropContext>
+      </div>
+    </div>
+  );
+}
