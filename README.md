@@ -1,5 +1,7 @@
 # Scratch starter project
 
+![Video](./src/video.mp4)
+
 To get started:
 
 - Run `npm i` to install dependencies
