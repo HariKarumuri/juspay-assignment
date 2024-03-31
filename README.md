@@ -1,6 +1,6 @@
 # Scratch starter project
 
-![Video](./src/video.mp4)
+![Video](./src/ezgif-7-9808707039.gif)
 
 To get started:
 
