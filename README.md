@@ -1,6 +1,6 @@
 # Scratch starter project
 
-![Video](./src/video.mp4)
+![Video](./src/components/video.mp4)
 
 To get started:
 
